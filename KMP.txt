@@ -1,0 +1,76 @@
+/*package whatever //do not write package name here */
+
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) {
+		String s="mississippi";
+		String p="issip";
+		int n=s.length();
+		int m=p.length();
+		int i=0;
+		int j=1;
+	    int arr[]=new int[m];
+	    arr[0]=0;
+	    //creating a table for p String
+		while(j<m)
+		{
+		    //if matches two Character then increament both i and j
+		    if(p.charAt(i)==p.charAt(j))
+		    {
+		        arr[j]=i+1;
+		        i++;
+		        j++;
+		    }
+		    //not matches
+		    else
+		    {
+		      //if not match goes to ith position
+		      if(i!=0)
+		      {
+		         i=arr[i-1];
+		      }
+		      // if i at first position then arr[j]=0 means no prefix==suffix till now
+		      else{
+		          arr[j]=0;
+		          j++;
+		      }
+		    }
+		}
+	
+	
+	//now comparing two string
+	   int k=0,l=0;
+	   while(k<n)
+	   {
+	       //if character are match then increament both pointer
+	       if(s.charAt(k)==p.charAt(l))
+	       {
+	           k++;
+	           l++;
+	       }
+	       //second string matches with first string
+	       if(l==m)
+	       {
+	           System.out.println("pattern found at "+(k-m));
+	           l=arr[l-1];
+	       }
+	       // charecter not matches 
+	       else if(k<n && s.charAt(k)!=p.charAt(l))
+	       {
+	           //if l not 0 find where to match
+	           if(l!=0)
+	           {
+	               l=arr[l-1];
+	               
+	           }
+	           //if l=0 then comparing with next character
+	           else{
+	               k=k+1;
+	           }
+	       }
+	   }
+	
+	
+	}
+}
